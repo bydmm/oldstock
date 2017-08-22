@@ -1,3 +1,3 @@
-threads 32,32
-workers 4
+threads ENV['THREAD'],ENV['THREAD']
+workers ENV['WORKER']
 preload_app!
