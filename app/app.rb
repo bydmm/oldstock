@@ -22,7 +22,6 @@ end
 
 get '/bilibili_login/' do
   content_type :json
-  puts params
   @user = User.find_by(token: params[:token])
   if @user.blank?
     @user = User.create(
