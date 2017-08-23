@@ -6,6 +6,8 @@ products:
   ports:
     - "4567:4567"
   environment:
-    - RAILS_ENV=production
-    - RACK_ENV=production
-    - APP_ENV=production
+    - THREAD=1
+    - WORKER=1
+    - RAILS_ENV=development
+    - RACK_ENV=development
+    - APP_ENV=development

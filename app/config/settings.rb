@@ -1,4 +1,5 @@
 configure do
+  set :server, :puma
 end
 
 configure :development do
@@ -6,5 +7,5 @@ configure :development do
 end
 
 configure :production do
-  set :server, :puma
+
 end
