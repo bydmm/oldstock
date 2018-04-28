@@ -10,6 +10,8 @@ require './config/settings'
 require './models/user'
 require 'pry' if development?
 
+set :protection, except: :json_csrf
+
 get '/' do
   content_type :json
   {

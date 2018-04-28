@@ -15,12 +15,12 @@ ENV APP_HOME /app
 
 RUN mkdir $APP_HOME
 
-ADD ./app/Gemfile* $APP_HOME/
+COPY ./app/Gemfile* $APP_HOME/
 
 RUN cd $APP_HOME/ \
     && bundle install
 
-ADD ./app $APP_HOME
+COPY ./app $APP_HOME
 
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
