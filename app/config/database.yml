@@ -1,17 +1,13 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: galgame
+  database: moestock
   username: root
-  password: Cn19870417
+  password:
   host: 127.0.0.1
   port: 3306
 
 production:
   adapter: mysql2
   encoding: utf8
-  database: galgame
-  username: povi
-  password: TXSMcBD54gNan734
-  host: rm-wz933zdb6o30z6cs7.mysql.rds.aliyuncs.com
-  port: 3306
+  database: moestock

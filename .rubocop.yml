@@ -1,0 +1,25 @@
+AllCops:
+  Exclude:
+    - 'test/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'Gemfile'
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/AbcSize:
+  Max: 30

@@ -1,11 +1,16 @@
 source 'http://gems.ruby-china.org'
 
-gem 'sinatra', '2.0.0'
+# CORE
+gem 'sinatra'
 gem 'sinatra-contrib'
-gem 'puma', '3.9.1'
+gem 'puma'
 
-gem "sinatra-activerecord"
-gem "mysql2"
-gem "rake"
+# DB
+gem 'mysql2'
+gem 'sinatra-activerecord'
+
+# ETC
+gem 'bcrypt', '~> 3.1.7'
+gem 'rake'
 
 gem 'pry'
