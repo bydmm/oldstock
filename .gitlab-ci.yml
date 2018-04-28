@@ -1,0 +1,15 @@
+stages:
+  - build
+
+build_tags:
+  stage: build
+  only:
+    - /^v.*$/
+  tags:
+    - builder
+  variables:
+    BUILD_NAME: 'moestock:$CI_COMMIT_TAG'
+  script:
+    - docker build --no-cache -t $BUILD_NAME ./
+    - docker tag $BUILD_NAME registry-internal.cn-shenzhen.aliyuncs.com/iqing/$BUILD_NAME
+    - docker push registry-internal.cn-shenzhen.aliyuncs.com/iqing/$BUILD_NAME
