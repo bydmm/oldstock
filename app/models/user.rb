@@ -10,4 +10,14 @@ class User < ActiveRecord::Base
   def generate_token
     self.token = String.random
   end
+
+  def love(stock)
+    StockTransaction.create(
+      payer_id: 0,
+      payee_id: user.id,
+      stock_id: stock.id,
+      pay_type: 'love',
+      amount: rand(1..10)
+    )
+  end
 end

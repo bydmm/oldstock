@@ -13,25 +13,25 @@
 ActiveRecord::Schema.define(version: 20180429060842) do
 
   create_table "coin_transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "payer"
-    t.integer "payee"
+    t.integer "payer_id"
+    t.integer "payee_id"
     t.integer "stock_id"
     t.integer "pay_type"
-    t.integer "amount"
+    t.integer "amount", default: 0
     t.index ["pay_type"], name: "index_coin_transactions_on_pay_type"
-    t.index ["payee"], name: "index_coin_transactions_on_payee"
-    t.index ["payer"], name: "index_coin_transactions_on_payer"
+    t.index ["payee_id"], name: "index_coin_transactions_on_payee_id"
+    t.index ["payer_id"], name: "index_coin_transactions_on_payer_id"
   end
 
   create_table "stock_transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "payer"
-    t.integer "payee"
+    t.integer "payer_id"
+    t.integer "payee_id"
     t.integer "stock_id"
     t.integer "pay_type"
-    t.integer "amount"
+    t.integer "amount", default: 0
     t.index ["pay_type"], name: "index_stock_transactions_on_pay_type"
-    t.index ["payee"], name: "index_stock_transactions_on_payee"
-    t.index ["payer"], name: "index_stock_transactions_on_payer"
+    t.index ["payee_id"], name: "index_stock_transactions_on_payee_id"
+    t.index ["payer_id"], name: "index_stock_transactions_on_payer_id"
     t.index ["stock_id"], name: "index_stock_transactions_on_stock_id"
   end
 
@@ -39,28 +39,27 @@ ActiveRecord::Schema.define(version: 20180429060842) do
     t.string "name"
     t.string "code"
     t.text "avatar"
-    t.index ["code"], name: "index_stocks_on_code"
+    t.index ["code"], name: "index_stocks_on_code", unique: true
   end
 
   create_table "user_stocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.integer "stock_id"
-    t.integer "amount"
-    t.index ["stock_id"], name: "index_user_stocks_on_stock_id"
-    t.index ["user_id"], name: "index_user_stocks_on_user_id"
+    t.integer "balance", default: 0
+    t.index ["user_id", "stock_id"], name: "index_user_stocks_on_user_id_and_stock_id", unique: true
   end
 
   create_table "user_wallets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
-    t.integer "amount"
-    t.index ["user_id"], name: "index_user_wallets_on_user_id"
+    t.integer "balance", default: 0
+    t.index ["user_id"], name: "index_user_wallets_on_user_id", unique: true
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "password_digest"
     t.string "token"
-    t.index ["token"], name: "index_users_on_token"
+    t.index ["token"], name: "index_users_on_token", unique: true
   end
 
 end

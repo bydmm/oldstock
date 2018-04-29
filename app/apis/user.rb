@@ -49,13 +49,11 @@ end
 # header "x-token": "435345435345",
 get '/api/user' do
   content_type :json
-  token = request.env['HTTP_X_TOKEN']
-  user = User.find_by(token: token)
-  if user
+  if current_user
     {
-      user_id: user.id,
-      name: user.name,
-      token: user.token
+      user_id: current_user.id,
+      name: current_user.name,
+      token: current_user.token
     }.to_json
   else
     {

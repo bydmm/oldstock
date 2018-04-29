@@ -1,10 +1,10 @@
 AllCops:
   Exclude:
-    - 'test/**/*'
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'Gemfile'
+    - 'app/test/**/*'
+    - 'app/bin/**/*'
+    - 'app/db/**/*'
+    - 'app/config/**/*'
+    - 'app/Gemfile'
 
 Bundler/OrderedGems:
   Enabled: false

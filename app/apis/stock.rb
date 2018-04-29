@@ -25,3 +25,10 @@ get '/api/stock/:code' do
     avatar: stock.avatar
   }.to_json
 end
+
+# 应援
+post '/api/stock/:code/love' do
+  content_type :json
+  stock = Stock.find_by(code: params[:code])
+  current_user.love(stock)
+end
