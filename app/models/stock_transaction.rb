@@ -11,7 +11,10 @@ class StockTransaction < ActiveRecord::Base
   private
 
   def change_user_stock
-    user_stock = UserStock.find_or_create_by(user: payee, stock: stock)
-    user_stock.update_attribute(balance: user_stock.balance + amount)
+    if amount >= 0
+      UserStock.add(payee, stock, amount)
+    else
+      UserStock.minus(payee, stock, amount)
+    end
   end
 end

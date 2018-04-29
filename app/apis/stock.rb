@@ -29,6 +29,12 @@ end
 # 应援
 post '/api/stock/:code/love' do
   content_type :json
+  return { error: true, error_code: 443, msg: '未登录' }.to_json unless current_user
   stock = Stock.find_by(code: params[:code])
-  current_user.love(stock)
+  transaction = current_user.love(stock)
+  if transaction.errors
+    { success: true, msg: "抽到了#{transaction.amount}股，恭喜" }
+  else
+    { success: false, msg: '没抽到，再接再厉' }
+  end.to_json
 end
