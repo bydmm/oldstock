@@ -30,11 +30,15 @@ end
 post '/api/stock/:code/love' do
   content_type :json
   return { error: true, error_code: 443, msg: '未登录' }.to_json unless current_user
+  payload = JSON.parse(request.body.read)
+  unless love?(params[:code], payload['love_power'], 4)
+    return { success: false, msg: '应援失败，再接再厉！' }.to_json
+  end
   stock = Stock.find_by(code: params[:code])
   transaction = current_user.love(stock)
   if transaction.errors
-    { success: true, msg: "抽到了#{transaction.amount}股，恭喜" }
+    { success: true, msg: "应援成功，抽到了#{transaction.amount}股！" }
   else
-    { success: false, msg: '没抽到，再接再厉' }
+    { success: false, msg: '服务器傲娇了' }
   end.to_json
 end

@@ -1,3 +1,4 @@
+require 'active_support/all'
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'sinatra/activerecord'
@@ -7,6 +8,7 @@ require 'i18n/backend/fallbacks'
 require 'securerandom'
 require './lib/random'
 require './lib/auth'
+require './lib/utility'
 require './config/settings'
 require './models/user'
 require './models/stock'

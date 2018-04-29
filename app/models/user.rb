@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
       payee_id: id,
       stock_id: stock.id,
       pay_type: 'love',
-      amount: rand(1..10)
+      amount: rand(1..5)
     )
   end
 end
