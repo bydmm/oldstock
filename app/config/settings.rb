@@ -1,3 +1,7 @@
+require 'pry' if development?
+
+set :protection, except: :json_csrf
+
 configure do
   set :server, :puma
   I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
