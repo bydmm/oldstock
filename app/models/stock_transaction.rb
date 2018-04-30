@@ -1,8 +1,7 @@
-
 class StockTransaction < ActiveRecord::Base
   belongs_to :payer, class_name: 'User', foreign_key: :payer
   belongs_to :payee, class_name: 'User', foreign_key: :payee_id
-  belongs_to :stock
+  belongs_to :stock, foreign_key: :stock_code
 
   enum pay_type: %i[love trade]
 

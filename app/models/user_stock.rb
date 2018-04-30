@@ -1,6 +1,6 @@
 class UserStock < ActiveRecord::Base
   belongs_to :user
-  belongs_to :stock
+  belongs_to :stock, foreign_key: :stock_code
 
   def self.find_and_create(other_user, other_stock)
     UserStock.where(user: other_user, stock: other_stock).first_or_create

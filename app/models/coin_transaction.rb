@@ -10,9 +10,9 @@ class CoinTransaction < ActiveRecord::Base
 
   def change_user_wallet
     if amount >= 0
-      UserWallet.add(payee, stock, amount)
+      UserWallet.add(payee, amount)
     else
-      UserWallet.minus(payee, stock, amount)
+      UserWallet.minus(payee, amount)
     end
   end
 end

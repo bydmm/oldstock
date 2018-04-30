@@ -15,9 +15,13 @@ class User < ActiveRecord::Base
     StockTransaction.create(
       payer_id: 0,
       payee_id: id,
-      stock_id: stock.id,
+      stock: stock,
       pay_type: 'love',
-      amount: rand(1..5)
+      amount: love_amount
     )
+  end
+
+  def love_amount
+    rand(1..10)
   end
 end

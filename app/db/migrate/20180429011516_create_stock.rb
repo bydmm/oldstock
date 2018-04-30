@@ -1,9 +1,11 @@
 class CreateStock < ActiveRecord::Migration[5.1]
   def change
-    create_table :stocks do |t|
+    create_table :stocks, id: false  do |t|
+      t.string :code, null: false
       t.string :name
-      t.string :code
       t.text :avatar
     end
+
+    add_index :stocks, :code, unique: true
   end
 end
