@@ -6,15 +6,8 @@ require 'sinatra/cookies'
 require 'i18n'
 require 'i18n/backend/fallbacks'
 require 'securerandom'
-require './lib/random'
-require './lib/auth'
-require './lib/utility'
 require './config/settings'
-require './models/user'
-require './models/stock'
-require './models/user_wallet'
-require './models/user_stock'
-require './models/stock_transaction'
-require './models/coin_transaction'
-require './apis/user'
-require './apis/stock'
+
+%w[models apis lib].each do |directory|
+  Dir[File.join(__dir__, directory, '*.rb')].each { |file| require file }
+end

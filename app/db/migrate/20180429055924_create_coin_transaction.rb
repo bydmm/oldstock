@@ -5,6 +5,7 @@ class CreateCoinTransaction < ActiveRecord::Migration[5.1]
       t.integer :payee_id
       t.integer :pay_type
       t.integer :amount, default: 0
+      t.text  :detail
       t.index :payer_id
       t.index :payee_id
       t.index :pay_type

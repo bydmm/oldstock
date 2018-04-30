@@ -29,32 +29,39 @@ end
 # 应援动态
 get '/api/stock/:code/love' do
   content_type :json
-  stock = Stock.find_by(params[:code])
+  stock = Stock.find(params[:code])
   StockTransaction
     .where(stock: stock, pay_type: 'love')
     .order(id: :desc)
     .limit(10)
     .map do |transaction|
     {
+      id: transaction.id,
       user: {
+        id: transaction.payee.id,
         name: transaction.payee.name
       },
       amount: transaction.amount,
-      created_at: transaction.created_at.to_i
+      detail: transaction.detail,
+      created_at: transaction.created_at.rfc2822
     }
-  end
+  end.to_json
 end
 
 # 应援
+# {
+#   "love_power": "1223243535",
+#   "cheer_word": "我永远喜欢英梨梨",
+# }
 post '/api/stock/:code/love' do
   content_type :json
   return { error: true, error_code: 443, msg: '未登录' }.to_json unless current_user
   payload = JSON.parse(request.body.read)
-  unless love?(params[:code], payload['love_power'], 4)
+  unless love?(params[:code], payload['cheer_word'], payload['love_power'], 4)
     return { success: false, msg: '应援失败，再接再厉！' }.to_json
   end
   stock = Stock.find(params[:code])
-  transaction = current_user.love(stock)
+  transaction = current_user.love(stock, payload)
   if transaction.errors
     { success: true, msg: "应援成功，抽到了#{transaction.amount}股！" }
   else

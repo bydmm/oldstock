@@ -3,9 +3,10 @@ class CreateStockTransaction < ActiveRecord::Migration[5.1]
     create_table :stock_transactions do |t|
       t.integer :payer_id
       t.integer :payee_id
-      t.integer :stock_code
+      t.string :stock_code
       t.integer :pay_type
       t.integer :amount, default: 0
+      t.text  :detail
       t.index :payer_id
       t.index :payee_id
       t.index :stock_code

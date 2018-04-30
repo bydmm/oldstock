@@ -1,9 +1,10 @@
 class StockTransaction < ActiveRecord::Base
+  enum pay_type: %i[love trade]
+  serialize :detail, Hash
+
   belongs_to :payer, class_name: 'User', foreign_key: :payer
   belongs_to :payee, class_name: 'User', foreign_key: :payee_id
   belongs_to :stock, foreign_key: :stock_code
-
-  enum pay_type: %i[love trade]
 
   after_save :change_user_stock
 

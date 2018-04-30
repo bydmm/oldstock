@@ -11,17 +11,23 @@ class User < ActiveRecord::Base
     self.token = String.random
   end
 
-  def love(stock)
+  def love(stock, detail)
     StockTransaction.create(
       payer_id: 0,
       payee_id: id,
       stock: stock,
       pay_type: 'love',
-      amount: love_amount
+      amount: love_amount,
+      detail: detail
     )
   end
 
   def love_amount
-    rand(1..10)
+    case rand(1..100)
+    when 100
+      233
+    else
+      rand(1..5)
+    end
   end
 end

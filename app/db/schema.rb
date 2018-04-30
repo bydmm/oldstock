@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180429060842) do
+ActiveRecord::Schema.define(version: 20180430095638) do
 
   create_table "coin_transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "payer_id"
     t.integer "payee_id"
     t.integer "pay_type"
     t.integer "amount", default: 0
+    t.text "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["pay_type"], name: "index_coin_transactions_on_pay_type"
@@ -24,12 +25,24 @@ ActiveRecord::Schema.define(version: 20180429060842) do
     t.index ["payer_id"], name: "index_coin_transactions_on_payer_id"
   end
 
+  create_table "stock_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id"
+    t.string "stock_code"
+    t.integer "price", default: 100
+    t.integer "amount", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_code"], name: "index_stock_orders_on_stock_code"
+    t.index ["user_id"], name: "index_stock_orders_on_user_id"
+  end
+
   create_table "stock_transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "payer_id"
     t.integer "payee_id"
-    t.integer "stock_code"
+    t.string "stock_code"
     t.integer "pay_type"
     t.integer "amount", default: 0
+    t.text "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["pay_type"], name: "index_stock_transactions_on_pay_type"
@@ -47,7 +60,7 @@ ActiveRecord::Schema.define(version: 20180429060842) do
 
   create_table "user_stocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
-    t.integer "stock_code"
+    t.string "stock_code"
     t.integer "balance", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
