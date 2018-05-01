@@ -26,6 +26,16 @@ get '/api/stock/:code' do
   }.to_json
 end
 
+# 我的持股
+get '/api/stock/:code/my' do
+  content_type :json
+  return { error: true, error_code: 401, msg: '未登录' }.to_json unless current_user
+  stock = Stock.find(params[:code])
+  {
+    balance: current_user.stock_balance(stock)
+  }.to_json
+end
+
 # 应援动态
 get '/api/stock/:code/love' do
   content_type :json
@@ -55,7 +65,7 @@ end
 # }
 post '/api/stock/:code/love' do
   content_type :json
-  return { error: true, error_code: 443, msg: '未登录' }.to_json unless current_user
+  return { error: true, error_code: 401, msg: '未登录' }.to_json unless current_user
   payload = JSON.parse(request.body.read)
   unless love?(params[:code], payload['cheer_word'], payload['love_power'], 4)
     return { success: false, msg: '应援失败，再接再厉！' }.to_json

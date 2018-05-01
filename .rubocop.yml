@@ -6,6 +6,9 @@ AllCops:
     - 'app/config/**/*'
     - 'app/Gemfile'
 
+Style/GuardClause:
+  Enabled: false
+
 Bundler/OrderedGems:
   Enabled: false
 

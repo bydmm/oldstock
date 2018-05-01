@@ -1,5 +1,12 @@
 ---
 zh-CN:
+  activemodel:
+    errors:
+      models:
+        order_form:
+          attributes:
+            code:
+              not_exist: 对应的股票不存在
   activerecord:
     models:
       user: 用户
@@ -8,9 +15,10 @@ zh-CN:
         name: "用户名"
         password: "密码"
         password_confirmation: "密码复核"
-    errors:
+      stock_order:
+        price: 报价
+        amount: 交易数量
       messages:
-        record_invalid: "验证失败: %{errors}"
         restrict_dependent_destroy:
           has_one: 由于 %{record} 需要此记录，所以无法移除记录
           has_many: 由于 %{record} 需要此记录，所以无法移除记录
@@ -92,6 +100,13 @@ zh-CN:
   errors:
     format: "%{attribute}%{message}"
     messages:
+      single_order_limit: 单支股票最多挂两单
+      total_order_limit: 最多挂五单
+      not_enough_blance: 援力余额不足
+      not_enough_stock: 持股数量不足
+      not_equal_zero: 不能等于0
+      record_invalid: "验证失败: %{errors}"
+      amount_lower_limit: 必须大于100股
       accepted: 必须是可被接受的
       blank: 不能为空字符
       present: 必须是空白

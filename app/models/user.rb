@@ -22,6 +22,16 @@ class User < ActiveRecord::Base
     )
   end
 
+  def balance
+    UserWallet.find_or_create_by(user: self).balance
+  end
+
+  def stock_balance(stock)
+    UserStock.find_and_create(self, stock).balance
+  end
+
+  private
+
   def love_amount
     case rand(1..100)
     when 100

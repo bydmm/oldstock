@@ -58,7 +58,7 @@ get '/api/user' do
   else
     {
       error: true,
-      error_code: 443,
+      error_code: 401,
       msg: '未登录'
     }.to_json
   end

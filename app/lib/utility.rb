@@ -7,6 +7,12 @@ module Sinatra
         hash = Digest::SHA512.hexdigest(raw_data)
         hash.match(/0{#{hard}}$/)
       end
+
+      def json_parse(body)
+        JSON.parse(body)
+      rescue JSON::ParserError
+        {}
+      end
     end
 
     def self.registered(app)

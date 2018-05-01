@@ -27,13 +27,14 @@ ActiveRecord::Schema.define(version: 20180430095638) do
 
   create_table "stock_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
+    t.integer "status"
     t.string "stock_code"
     t.integer "price", default: 100
     t.integer "amount", default: 1
+    t.text "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["stock_code"], name: "index_stock_orders_on_stock_code"
-    t.index ["user_id"], name: "index_stock_orders_on_user_id"
+    t.index ["user_id", "status", "stock_code"], name: "index_stock_orders_on_user_id_and_status_and_stock_code"
   end
 
   create_table "stock_transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
