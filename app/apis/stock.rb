@@ -26,6 +26,30 @@ get '/api/stock/:code' do
   }.to_json
 end
 
+# 挂单列表
+get '/api/stock/:code/order' do
+  content_type :json
+  stock = Stock.find(params[:code])
+  orders = StockOrder.where(stock: stock, status: 'padding').order(id: :desc)
+  data = orders.limit(10).map do |order|
+    {
+      id: order.id,
+      user: {
+        id: order.user.id,
+        name: order.user.name
+      },
+      price: order.price,
+      amount: order.amount,
+      detail: order.detail,
+      created_at: order.created_at.rfc2822
+    }
+  end
+  {
+    count: orders.count,
+    data: data
+  }.to_json
+end
+
 # 我的持股
 get '/api/stock/:code/my' do
   content_type :json
