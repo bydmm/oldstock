@@ -8,6 +8,7 @@ gem 'puma'
 # DB
 gem 'mysql2'
 gem 'sinatra-activerecord'
+gem 'sqlite3'
 
 # ETC
 gem 'bcrypt', '~> 3.1.7'
@@ -15,3 +16,5 @@ gem 'rake'
 gem "activesupport"
 
 gem 'pry'
+
+gem 'rack-test'
